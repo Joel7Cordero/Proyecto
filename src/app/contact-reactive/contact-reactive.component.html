@@ -1,0 +1,46 @@
+ <pre>{{departments}}</pre>
+<pre>{{contactForm.value | json }}</pre>
+<h1>Contact Reactive Form {{name}}</h1>
+<form (ngSubmit)="onSubmit()" [formGroup]="contactForm">
+    <div class="mb-4">
+        <label for="name">Name</label>
+        <input matInput type="text" class="form-control" id="name" name="name" formControlName="name" required>
+        <div class="alert alert-danger"
+            *ngIf="contactForm.get('name')?.touched && contactForm.get('name')?.errors?.['required']">This Field is
+            Required</div>
+        <!-- <div [hidden]="name.valid || name.pristine" class="alert alert-danger">This Field Is Required</div> -->
+        <div class="alert alert-danger"
+            *ngIf="contactForm.get('name')?.touched && contactForm.get('name')?.errors?.['minlength']">name must be
+            longer than {{contactForm.get('name')?.errors?.['minlength'].requiredLength}} characters</div>
+    </div>
+    <div class="col-md-4">
+        <label for="checkAdult">Are you over 18 years of age?</label>
+        <input type="checkbox" id="name" name="checkAdult" formControlName="checkAdult" required>
+        <!-- <div [hidden]="checkAdult.valid || name.pristine" class="alert alert-danger">This Field Is Required</div> -->
+        <div class="alert alert-danger"
+            *ngIf="contactForm.get('checkAdult')?.touched && contactForm.get('checkAdult')?.errors?.['required']"> Field Required</div>
+    </div>
+
+    <div class="mb-4">
+        <label for="department">Department</label>
+        <select name="" id="" name="department" formControlName="department" required>
+            <option selected>Open select menu</option>
+            <option *ngFor="let department of departments" [value]="department">{{department}}</option>
+            <!-- <option value="sales">Sales</option>
+            <option value="other">Other</option> -->
+        </select>
+    </div>
+    <div class="mb-4">
+        <label for="comment">Comment</label>
+        <textarea class="form-control" name="comment" id="comment" placeholder="leave a comment..." rows="4"
+            formControlName="comment"></textarea>
+        <!-- <div [hidden]="comment.valid || name.pristine" class="alert alert-danger">This Field Is Required</div> -->
+        <div class="alert alert-danger"
+            *ngIf="contactForm.get('comment')?.touched && contactForm.get('comment')?.errors?.['required']">This field
+            is required</div>
+    </div>
+    <div class="d-grid  gap-2 col-md-2 float-end">
+        <button mat-raised-button color="primary" type="submit" [disabled]="contactForm.invalid">Send</button>
+
+    </div>
+</form>

@@ -1,0 +1,41 @@
+<pre>{{contactForm.value | json }}</pre>
+<h1>Contact Form {{id}}</h1>
+<form (ngSubmit)="onSubmit(contactForm)" #contactForm="ngForm">
+    <div class="mb-4">
+        <label for="name" >Name</label>
+        <input matInput type="text" class="form-control" id="name" name="name"
+         [(ngModel)]="model.name" required #name="ngModel">
+        <div [hidden]="name.valid || name.pristine" class="alert alert-danger">This Field Is Required</div>
+    </div>
+
+    <div class="col-md-4">
+        <label for="checkAdult" >Are you over 18 years of age?</label>
+        <input type="checkbox" id="name" name="checkAdult" [(ngModel)]="model.checkAdult" required #checkAdult="ngModel">
+        <div [hidden]="checkAdult.valid || name.pristine" class="alert alert-danger">This Field Is Required</div>
+    </div>
+    <div class="mb-4">
+        <label for="department" >Department</label>
+       <select name="" id="" name="department" [(ngModel)]="model.department" required>
+        <option selected>Open select menu</option>
+        <option value="marketing">Marketing</option>
+        <option value="sales">Sales</option>
+        <option value="other">Other</option>
+       </select>
+
+    </div>
+    <div class="mb-4">
+        <label for="comment" >Comment</label>
+       <textarea class="form-control" name="comment" id="comment" placeholder="leave a comment..." rows="4" 
+       [(ngModel)]="model.comment" required #comment="ngModel"></textarea>
+        <div [hidden]="comment.valid || name.pristine" class="alert alert-danger">This Field Is Required</div>
+    </div>
+    <div class="d-grid  gap-2 col-md-2 float-end">
+        <button mat-raised-button color="primary" type="submit" [disabled]="contactForm.invalid">Send</button>
+    
+    </div>
+</form>
+
+      
+     
+      
+
